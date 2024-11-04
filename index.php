@@ -1,32 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>LATIHAN WEB PROGRAMMING</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-	<div class="container">
-<center><h1>Data User</h1></center>
-<div class="div1">
-<?php 
-	include "koneksi.php";
-	if($_GET == "useradd"){
-		include "useradd.php";
-	}
-	else if($_GET== "useredit"){
-		include "useredit.php";
-	}
-	else if($_GET == "userdel"){
-		include "userdel.php";
-	}
-	else{
-		include "user.php";
-	}
+<?php
+session_start();
+include "koneksi.php";
+$sqlag = mysqli_query($kon,"select * from anggota where email='$_SESSION[userag]' and password='$_SESSION[passag]'");
+$rag = mysqli_fetch_array($sqlag);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Oline shope Agil Saputra</title>
+</head>
+<body>
+
+<div class="container1">
+    <div class="grid">
+        <div class="dh12">
+            Padang,Indonesia | 082288441637 | sales@epwmonlineshope.com
 </div>
 </div>
+</div>
+
+<?php
+include"menu.php";
+?>
+
+<div class="container3">
+    <div class="grid">
+        <div class="dh12">
+            <form action="<?php "?p=produkterbaru";?>" method="post">
+        <input type="text" name="nama" id="cari" placeholder="Ketik Nama Produk yang akan dicari">
+        <input type="submit" name="cari" value="Cari">
+        </form>
+</div>
+</div>
+</div>
+
+<?php
+if($_GET["p"] == "produkterbaru"){
+    include "produkterbaru.php";
+}else if($_GET["p"] == "produkdetail"){
+    include "produkdetail.php";
+}else{
+    include "home.php";
+    include "produkterbaru.php";
+}
+?>
+
+<div class="container6">
+    <div class="grid">
+        <div class="dh12">
+            Copyright &copy; Agil Saputra 2024
+</div>
+</div>
+</div>
+    
 </body>
 </html>
